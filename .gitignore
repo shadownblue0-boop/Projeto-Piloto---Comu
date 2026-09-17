@@ -1,0 +1,23 @@
+# dependências e build
+node_modules/
+dist/
+*.log
+.DS_Store
+Thumbs.db
+.playwright-mcp/
+
+# Fontes comerciais (Neue Haas Display, Daft Brush): ficam fora do repositório
+# público por licença. Veja "Fontes" no README para colocá-las localmente.
+public/fonts/*
+!public/fonts/.gitkeep
+
+# Material bruto de marca e referências (pesado e não é código)
+Identidade Visual/
+Fonte/
+Referencia Pinterest/
+
+# Capturas de QA (100+ MB de PNG)
+qa/
+
+# estado interno do Claude Code
+.claude/

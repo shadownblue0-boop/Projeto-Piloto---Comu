@@ -1,0 +1,12 @@
+@import './preflight.css';
+@import './fonts.css';
+
+/* Fundo do documento igual ao da página, para o overscroll não piscar branco. */
+html {
+  background: #0b0b10;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
