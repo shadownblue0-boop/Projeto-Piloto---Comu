@@ -11,14 +11,14 @@ npm test         # vitest (renderização estática das seções)
 npm run build    # gera dist/
 ```
 
-## Fontes (não estão no repositório)
+## Fontes
 
-As fontes da marca são comerciais e ficam fora do Git. Sem elas o site abre com
-fontes substitutas (Impact no lugar da Daft Brush, sans do sistema no lugar da
-Neue Haas). Para ver o piloto como ele é, coloque estes arquivos em `public/fonts/`:
+A Daft Brush (títulos) está no repositório em `public/fonts/DaftBrush.otf` e vai
+para o site publicado. A Neue Haas Display (texto corrido) é da Monotype e fica
+fora do Git: sem ela o site usa a sans do sistema. Para ver o piloto completo,
+coloque estes arquivos em `public/fonts/`:
 
 ```
-public/fonts/DaftBrush.otf
 public/fonts/NeueHaasDisplayLight.ttf
 public/fonts/NeueHaasDisplayRoman.ttf
 public/fonts/NeueHaasDisplayMediu.ttf
@@ -26,8 +26,14 @@ public/fonts/NeueHaasDisplayBold.ttf
 public/fonts/NeueHaasDisplayBlack.ttf
 ```
 
-Os nomes precisam ser exatamente esses (são os que `src/styles/fonts.css` e
-`piloto.css` declaram). A pasta já está ignorada pelo `.gitignore`.
+Os nomes precisam ser exatamente esses (são os que `src/styles/fonts.css` declara).
+O `.gitignore` deixa só a Daft Brush entrar nessa pasta.
+
+## Publicação
+
+O site está na Vercel (https://projeto-piloto-comu.vercel.app), publicado a cada
+push na `main`. O `vercel.json` reescreve toda rota para `index.html`, senão
+`/artefatos` e `/professor/:id` dão 404 quando abertos direto pelo endereço.
 
 ## Estrutura
 

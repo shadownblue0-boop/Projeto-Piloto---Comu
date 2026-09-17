@@ -6,10 +6,12 @@ dist/
 Thumbs.db
 .playwright-mcp/
 
-# Fontes comerciais (Neue Haas Display, Daft Brush): ficam fora do repositório
-# público por licença. Veja "Fontes" no README para colocá-las localmente.
+# Neue Haas Display (Monotype) fica fora do repositório público por licença.
+# A Daft Brush entra: é a fonte da identidade e o site publicado precisa dela.
+# Veja "Fontes" no README.
 public/fonts/*
 !public/fonts/.gitkeep
+!public/fonts/DaftBrush.otf
 
 # Material bruto de marca e referências (pesado e não é código)
 Identidade Visual/
