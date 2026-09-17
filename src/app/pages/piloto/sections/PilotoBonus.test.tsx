@@ -32,11 +32,14 @@ describe('PilotoBonus', () => {
     }
   });
 
-  it('a Biblioteca vira vitrine, com os artefatos reais à mostra', () => {
+  it('os Artefatos viram vitrine, com capas reais e um botão de acesso à estante', () => {
     const html = render(<PilotoBonus />);
     expect(html).toContain('piloto-incluso__destaque');
     expect(html).toContain('/piloto/biblioteca-artefatos.jpg');
-    expect(html).toContain('Biblioteca');
+    expect(html).toContain('Artefatos');
+    expect(html).not.toMatch(/piloto-incluso__titulo">Biblioteca/);
+    // o Link do router escreve class antes de href
+    expect(html).toMatch(/<a[^>]*class="piloto-btn[^"]*"[^>]*href="\/artefatos"/);
     // o que a pessoa realmente baixa
     for (const chip of ['Ebooks', 'Brushes', 'Packs 3D']) expect(html).toContain(chip);
   });

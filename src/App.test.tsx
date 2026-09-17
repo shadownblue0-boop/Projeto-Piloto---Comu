@@ -16,7 +16,29 @@ describe('App (site independente do piloto)', () => {
     expect(renderAt('/')).toContain('id="piloto"');
   });
 
-  it('qualquer outro caminho também cai no piloto (links internos não quebram)', () => {
-    expect(renderAt('/student/courses/personagem-rpg')).toContain('id="piloto"');
+  it('qualquer caminho desconhecido cai na home (links do app real não quebram)', () => {
+    expect(renderAt('/student/courses/personagem-rpg')).toContain('id="hero"');
+  });
+
+  it('/artefatos abre a página de artefatos', () => {
+    const html = renderAt('/artefatos');
+    expect(html).toContain('id="artefatos"');
+    expect(html).not.toContain('id="hero"');
+  });
+
+  it('/artefatos/:slug abre o detalhe de um artefato real', () => {
+    const html = renderAt('/artefatos/personagens-3d-para-treinamento');
+    expect(html).toContain('id="artefato"');
+    expect(html).toContain('Personagens 3D para treinamento');
+  });
+
+  it('/professor/:id abre o perfil com portfólio; a rota antiga do app também', () => {
+    expect(renderAt('/professor/giovanni-fim')).toContain('id="professor"');
+    expect(renderAt('/mentoria/mentor/giovanni-fim')).toContain('id="professor"');
+  });
+
+  it('id desconhecido de professor ou artefato mostra um aviso, não uma tela vazia', () => {
+    expect(renderAt('/professor/ninguem')).toContain('piloto-vazio');
+    expect(renderAt('/artefatos/nada')).toContain('piloto-vazio');
   });
 });

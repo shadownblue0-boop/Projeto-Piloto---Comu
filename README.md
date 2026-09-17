@@ -32,7 +32,9 @@ Os nomes precisam ser exatamente esses (são os que `src/styles/fonts.css` e
 ## Estrutura
 
 - `src/app/pages/piloto/`: a página (`PilotoPage.tsx`), seções, doodles e `piloto.css` (tudo escopado em `.piloto`).
-- `src/app/pages/piloto/pilotoData.ts`: conteúdo. Cursos, professores, softwares, vídeos e galeria são um snapshot do catálogo do app.
+- `src/app/pages/piloto/pilotoData.ts`: conteúdo da home. Cursos, professores, softwares, vídeos e galeria são um snapshot do catálogo do app.
+- `src/app/pages/piloto/artefatosData.ts` e `professoresData.ts`: estante de artefatos (25) e perfis com portfólio (6 professores, 104 obras), também snapshot.
+- `src/app/pages/artefatos/` e `src/app/pages/professor/`: páginas internas (`/artefatos`, `/artefatos/:slug`, `/professor/:id`), montadas sobre `PilotoShell`.
 - `src/app/data/explorerData.ts`: categorias temáticas dos filtros da galeria (snapshot).
 - `src/app/hooks/`: `useInView` (reveals) e `useScrollSpy` (seção ativa no header).
 - `src/styles/`: preflight do Tailwind v4 (mesmo reset do app) e declarações das fontes.
@@ -44,5 +46,5 @@ Ficam só na máquina local (ignorados): `qa/` (capturas), `Fonte/`, `Identidade
 ## Pendências
 
 - Não existe vídeo institucional da Comu: a seção "Aula aberta" usa aulas reais do canal. Quando houver, basta pôr o ID no topo de `PILOTO_VIDEOS`.
-- Os links internos (`/cursos`, `/galeria`, `/projeto/:id`, `/student/courses/...`) apontam para rotas do app real; aqui todas caem na própria página.
+- Os links para rotas do app real (`/cursos`, `/galeria`, `/projeto/:id`, `/student/courses/...`) caem na home. Artefatos e perfil de professor já existem aqui.
 - Ao portar para o app, trocar as constantes de snapshot em `pilotoData.ts` pelos getters dos mocks (comentário no topo do arquivo).

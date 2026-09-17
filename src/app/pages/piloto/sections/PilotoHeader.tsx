@@ -9,8 +9,17 @@ const NAV = PILOTO_SECTIONS.filter((s) => !['hero', 'cta', 'video'].includes(s.i
  * Header do piloto. Recebe de fora a seção visível (scrollspy) para marcar o
  * link correspondente, e encolhe assim que a página sai do topo — o cabeçalho
  * deixa de ser um bloco inerte e passa a dizer onde a pessoa está.
+ *
+ * Nas páginas internas (`foraDaHome`) as âncoras viram `/#secao`, senão o
+ * clique não sai do lugar.
  */
-export function PilotoHeader({ activeSection }: { activeSection?: string | null }) {
+export function PilotoHeader({
+  activeSection,
+  foraDaHome = false,
+}: {
+  activeSection?: string | null;
+  foraDaHome?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -24,21 +33,25 @@ export function PilotoHeader({ activeSection }: { activeSection?: string | null 
   const classes = ['piloto-header', open ? 'is-open' : '', scrolled ? 'is-scrolled' : '']
     .filter(Boolean)
     .join(' ');
+  const ancora = (id: string) => (foraDaHome ? `/#${id}` : `#${id}`);
 
   return (
     <header className={classes}>
       <div className="piloto-wrap">
         <div className="piloto-header__inner">
-          <Link to="/piloto" className="piloto-header__logo" aria-label="Comunidade da Arte — início do piloto">
+          <Link to="/" className="piloto-header__logo" aria-label="Comunidade da Arte — início">
             <img src="/brand/WriteBranca.png" alt="Comunidade da Arte" width={180} height={34} />
           </Link>
 
           <nav className="piloto-header__nav" aria-label="Seções da página">
             {NAV.map((s) => (
-              <a key={s.id} href={`#${s.id}`} aria-current={activeSection === s.id ? true : undefined}>
+              <a key={s.id} href={ancora(s.id)} aria-current={activeSection === s.id ? true : undefined}>
                 {s.label}
               </a>
             ))}
+            <Link to="/artefatos" aria-current={activeSection === 'artefatos' ? true : undefined}>
+              Artefatos
+            </Link>
           </nav>
 
           <div className="piloto-header__actions">
@@ -72,13 +85,16 @@ export function PilotoHeader({ activeSection }: { activeSection?: string | null 
           {NAV.map((s) => (
             <a
               key={s.id}
-              href={`#${s.id}`}
+              href={ancora(s.id)}
               aria-current={activeSection === s.id ? true : undefined}
               onClick={() => setOpen(false)}
             >
               {s.label}
             </a>
           ))}
+          <Link to="/artefatos" onClick={() => setOpen(false)}>
+            Artefatos
+          </Link>
         </div>
       </div>
     </header>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getPilotoBenefits, getPilotoTeachers } from '../pilotoData';
-import { BrushUnderline, Check, Doodle, Sparkle } from '../Doodles';
+import { ArrowRight, BrushUnderline, Check, Doodle, Sparkle } from '../Doodles';
 import { Reveal, SectionHead } from './shared';
 
 /**
@@ -125,14 +126,14 @@ export function PilotoBonus() {
           ))}
         </div>
 
-        {/* "Tudo incluso": a Biblioteca ganha vitrine com os artefatos reais —
+        {/* "Tudo incluso": os Artefatos ganham vitrine com as capas reais —
             é o benefício mais concreto e antes era um cartãozinho de ícone. */}
         <Reveal className="piloto-incluso" delay={180} variant="scale">
           <div className="piloto-card piloto-incluso__destaque">
             <div className="piloto-incluso__arte">
               <img
                 src="/piloto/biblioteca-artefatos.jpg"
-                alt="Ebooks, packs de brushes e materiais da biblioteca da Comu"
+                alt="Ebooks, packs de brushes e materiais dos artefatos da Comu"
                 width={1040}
                 height={320}
                 loading="lazy"
@@ -140,7 +141,7 @@ export function PilotoBonus() {
             </div>
             <div className="piloto-incluso__texto">
               <span className="piloto-eyebrow">Incluso</span>
-              <h3 className="piloto-incluso__titulo">Biblioteca</h3>
+              <h3 className="piloto-incluso__titulo">Artefatos</h3>
               <p>
                 Material que você <strong>baixa e usa</strong>: ebooks de anatomia e personagens,
                 packs de brushes e cenários 3D para treinar.
@@ -151,6 +152,10 @@ export function PilotoBonus() {
                 <span className="piloto-tag">Packs 3D</span>
                 <span className="piloto-tag">Referências</span>
               </div>
+              <Link to="/artefatos" className="piloto-btn piloto-incluso__acesso">
+                Ver os artefatos
+                <ArrowRight />
+              </Link>
             </div>
           </div>
 

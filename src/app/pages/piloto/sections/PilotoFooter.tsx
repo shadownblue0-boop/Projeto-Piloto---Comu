@@ -38,7 +38,7 @@ const SOCIAL = [
 const NAV = PILOTO_SECTIONS.filter((s) => s.id !== 'hero' && s.id !== 'cta');
 
 /** Footer próprio do piloto — links reais do site, sem chrome Chromia. */
-export function PilotoFooter() {
+export function PilotoFooter({ foraDaHome = false }: { foraDaHome?: boolean }) {
   return (
     <footer className="piloto-footer">
       <div className="piloto-wrap">
@@ -60,7 +60,7 @@ export function PilotoFooter() {
             <ul>
               {NAV.map((s) => (
                 <li key={s.id}>
-                  <a href={`#${s.id}`}>{s.label}</a>
+                  <a href={foraDaHome ? `/#${s.id}` : `#${s.id}`}>{s.label}</a>
                 </li>
               ))}
             </ul>
@@ -72,7 +72,7 @@ export function PilotoFooter() {
               <li><Link to="/cursos">Cursos</Link></li>
               <li><Link to="/professores">Professores</Link></li>
               <li><Link to="/desafios">Desafios</Link></li>
-              <li><Link to="/biblioteca">Biblioteca</Link></li>
+              <li><Link to="/artefatos">Artefatos</Link></li>
             </ul>
           </div>
 

@@ -14,4 +14,12 @@ describe('PilotoFooter', () => {
     expect(html).toContain('https://www.instagram.com/comunidadedaarte');
     expect(html).toContain('https://www.youtube.com/@comunidadedaarte');
   });
+
+  it('aponta para a página de artefatos e, fora da home, as âncoras voltam para a home', () => {
+    const html = render(<PilotoFooter foraDaHome />);
+    expect(html).toContain('href="/artefatos"');
+    expect(html).not.toContain('href="/biblioteca"');
+    expect(html).toContain('href="/#galeria"');
+    expect(html).not.toContain('href="#galeria"');
+  });
 });

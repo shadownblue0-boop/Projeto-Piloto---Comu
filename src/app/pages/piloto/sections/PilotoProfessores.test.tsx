@@ -23,6 +23,11 @@ describe('PilotoProfessores', () => {
     expect(mosaico).toContain('aria-hidden="true"');
   });
 
+  it('cada card leva para a página do professor daqui do piloto', () => {
+    const html = render(<PilotoProfessores />);
+    for (const t of getPilotoTeachers()) expect(html).toContain(`href="/professor/${t.id}"`);
+  });
+
   it('mostra foto, nome e link de cada professor', () => {
     const html = render(<PilotoProfessores />);
     for (const t of getPilotoTeachers()) {

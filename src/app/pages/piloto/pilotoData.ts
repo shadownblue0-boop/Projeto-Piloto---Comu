@@ -388,7 +388,7 @@ export function getPilotoTeachers(): PilotoTeacher[] {
       { src: '/teachers/gallery/caio-cesar/caio-cesar-jerrylightyear.jpg', title: "Jerry Lightyear", href: '/projeto/cc-p17' },
     ],
   },
-  ].map((t) => ({ ...t, href: `/mentoria/mentor/${t.id}` }));
+  ].map((t) => ({ ...t, href: `/professor/${t.id}` }));
 }
 
 export interface PilotoBenefit {

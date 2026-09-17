@@ -181,3 +181,25 @@ Feedback: usar os ícones reais dos aplicativos na seção de Softwares; deixar 
 **Correção (mesma rodada):** os três ícones de linha em quadradinho amarelo — troféu, medalha e pessoas — foram apontados pelo usuário como "cara de site feito por IA", e estavam certos: é o carimbo genérico. Foram substituídos por material real da Comu: **Desafios** mostra a arte de uma capa de desafio de verdade (recorte de `capa-desafio-1.png`, acima do título impresso); **Certificado** usa o selo da marca, recolorido em amarelo a partir do `SELO TRANSPARENTE BRANCO.png` (o `tint` do sharp não recolore arte transparente; o jeito certo é usar o canal alfa como máscara sobre uma camada amarela chapada) e que gira de leve no hover; **Comunidade** mostra três rostos reais de professores, sobrepostos, que se abrem no hover. O teste agora falha se voltar a existir qualquer `<svg>` nessa lista.
 
 Armadilha encontrada: a lista estilizava `span` por elemento (`.piloto-incluso__lista span`, 0-1-1), o que vencia as classes dos visuais (0-1-0) e empilhava os avatares na vertical. As regras dos visuais passaram a ser prefixadas pela lista.
+
+---
+
+## v4.3 — Artefatos e perfil do professor (páginas internas)
+
+Pedido: o card da Biblioteca precisa de um botão que leve aos itens (ebooks, playbooks, brushes, packs); os cards de professor precisam abrir uma página com as informações e o portfólio completo, como no site original; "Biblioteca" passa a se chamar **Artefatos**. O original (CDA-GERAL) já tem os dados, para recriar no nosso estilo, não copiar.
+
+**Dados (snapshot de 2026-09-17, extraídos do app com esbuild):**
+- `artefatosData.ts`: 25 artefatos — 12 ebooks e 8 playbooks de `mockEbooksData.ts` (capas reais em `/materiais`), mais 3 packs 3D e 2 packs de brushes com as capas feitas pelo usuário (`D:\ARTEFATOS CAPA`). Os textos dos packs foram escritos a partir do que cada capa mostra.
+- `professoresData.ts`: os 6 professores em destaque na home, com bio, áreas, trajetória, rede social e o portfólio inteiro (104 obras) de `mockPublicProfileData.ts`. 69 imagens novas copiadas e redimensionadas.
+
+**Rotas** (`src/App.tsx`): `/artefatos`, `/artefatos/:slug`, `/professor/:id`; `/mentoria/mentor/:id` (rota do app real) aponta para o mesmo perfil. O resto continua caindo na home.
+
+**Casca** (`PilotoShell`): header e rodapé da home na mesma raiz `.piloto`; fora da home, as âncoras viram `/#secao`; título do documento e rolagem ao topo a cada troca de rota. Header e rodapé ganharam o link **Artefatos**.
+
+**Artefatos**: estante agrupada por tipo (contagem no topo, chips que filtram), cards com capa real, tipo, nível e tema; detalhe com capa fixa na rolagem, "o que tem dentro", "para quem é", tags, CTA e "mais do mesmo tipo".
+
+**Professor**: capa com a arte dele fundindo com o papel, retrato, nome em Daft pintado, área, frase, números (obras, cursos, alunos, desde); painel "Sobre" com bio, redes reais, domínios e trajetória em linha do tempo; portfólio completo em masonry full-bleed com filtro por categoria e **lightbox** (Esc, setas, clique fora); outros professores no fim.
+
+**Armadilha nova:** dentro de `.piloto` cada filho direto abre contexto de empilhamento (`position: relative; z-index: 1`), então o header sticky cobria o botão de fechar do lightbox por mais alto que fosse o z-index. Solução: `createPortal` para o `body`.
+
+**Verificação:** 110 testes (rotas, dados com existência das imagens no disco, páginas, shell, lightbox como botão e não link), build ok, sem rolagem horizontal em 1440 e 390, caminhos home → card → página confirmados no navegador.

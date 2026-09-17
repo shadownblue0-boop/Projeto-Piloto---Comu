@@ -14,6 +14,16 @@ describe('PilotoHeader', () => {
     expect(html).toContain('href="/cursos"');
   });
 
+  it('tem link para a página de artefatos', () => {
+    expect(render(<PilotoHeader />)).toContain('href="/artefatos"');
+  });
+
+  it('fora da home, as âncoras viram /#secao para voltar à home no lugar certo', () => {
+    const html = render(<PilotoHeader foraDaHome />);
+    expect(html).toContain('href="/#cursos"');
+    expect(html).not.toContain('href="#cursos"');
+  });
+
   it('marca a seção visível com aria-current (scrollspy)', () => {
     const html = render(<PilotoHeader activeSection="cursos" />);
     expect(html).toMatch(/<a[^>]*href="#cursos"[^>]*aria-current="true"/);
